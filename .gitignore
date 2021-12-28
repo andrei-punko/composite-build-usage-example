@@ -1,0 +1,10 @@
+### Gradle template
+.gradle
+/build/
+
+# User-specific stuff
+/.idea
+out/
+*.iml
+*.ipr
+*.iws
