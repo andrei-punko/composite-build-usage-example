@@ -1,3 +1,11 @@
-import by.andd3dfx.build.lib
+import by.andd3dfx.build.service
+import by.andd3dfx.build.springBoot
 
-lib(version = "0.0.1")
+service(version = "0.0.1") {
+    dependencies {
+        springBoot {
+            web()
+            test()
+        }
+    }
+}
