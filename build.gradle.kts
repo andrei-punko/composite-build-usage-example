@@ -1,4 +1,5 @@
 import by.andd3dfx.build.*
+import by.andd3dfx.build.Plugins.Companion.applyPlugins
 
 service(version = "0.0.1") {
     dependencies {
@@ -17,5 +18,9 @@ service(version = "0.0.1") {
         flywayCore()
         testContainers()
         postgresTestContainers()
+
+        applyPlugins {
+            springBoot()
+        }
     }
 }
