@@ -39,7 +39,7 @@ service(version = "0.0.1") {
 ```
 
 ## Prerequisites
-- JDK 11
+- JDK 17
 - Docker
 
 ## How to build
