@@ -1,12 +1,15 @@
 
 # Composite Build usage example
-
 ![Java CI with Gradle](https://github.com/andrei-punko/composite-build-usage-example/workflows/Java%20CI%20with%20Gradle/badge.svg)
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/composite-build-usage-example/actions/workflows/gradle.yml)
 [![Branches](.github/badges/branches.svg)](https://github.com/andrei-punko/composite-build-usage-example/actions/workflows/gradle.yml)
 
-Based on [this](https://github.com/andrei-punko/spring-boot-template) Spring Boot app template.
-Sources was not changed, only build script adjusted
+Based on [this](https://github.com/andrei-punko/spring-boot-2-template) Spring Boot app template.
+Sources was not changed almost, only build script adjusted
+
+## Prerequisites
+- JDK 21
+- Docker
 
 ## Approach description
 
@@ -37,10 +40,6 @@ service(version = "0.0.1") {
     }
 }
 ```
-
-## Prerequisites
-- JDK 21
-- Docker
 
 ## How to build
 ```
