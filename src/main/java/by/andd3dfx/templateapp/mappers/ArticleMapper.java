@@ -11,12 +11,11 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedTargetPolicy = ReportingPolicy.IGNORE
+)
 public interface ArticleMapper {
 
     ArticleDto toArticleDto(Article article);
-
-    List<ArticleDto> toArticleDtoList(List<Article> articles);
 
     Article toArticle(ArticleDto articleDto);
 

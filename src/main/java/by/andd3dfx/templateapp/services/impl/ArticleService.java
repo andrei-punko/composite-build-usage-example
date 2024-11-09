@@ -7,15 +7,13 @@ import by.andd3dfx.templateapp.mappers.ArticleMapper;
 import by.andd3dfx.templateapp.persistence.dao.ArticleRepository;
 import by.andd3dfx.templateapp.persistence.entities.Article;
 import by.andd3dfx.templateapp.services.IArticleService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -54,11 +52,9 @@ public class ArticleService implements IArticleService {
     @Transactional
     @Override
     public void delete(Long id) {
-        try {
+        if (articleRepository.existsById(id)) {
             articleRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException ex) {
-            throw new ArticleNotFoundException(id);
-        }
+        } else throw new ArticleNotFoundException(id);
     }
 
     @Transactional(readOnly = true)
