@@ -23,6 +23,7 @@ class ArticleMapperTest {
         Article article = buildArticle();
 
         ArticleDto articleDto = mapper.toArticleDto(article);
+
         checkCompareAssertions(articleDto, article);
     }
 
@@ -32,25 +33,11 @@ class ArticleMapperTest {
     }
 
     @Test
-    void toArticleDtoList() {
-        Article article = buildArticle();
-        List<Article> articles = Arrays.asList(article);
-
-        List<ArticleDto> articleDtoItems = mapper.toArticleDtoList(articles);
-        assertThat("Wrong result list size", articleDtoItems.size(), is(1));
-        checkCompareAssertions(articleDtoItems.get(0), article);
-    }
-
-    @Test
-    void toArticleDtoListForNull() {
-        assertThat(mapper.toArticleDtoList(null), nullValue());
-    }
-
-    @Test
     void toArticle() {
         ArticleDto articleDto = buildArticleDto();
 
         Article article = mapper.toArticle(articleDto);
+
         checkCompareAssertions(articleDto, article);
     }
 
@@ -61,9 +48,10 @@ class ArticleMapperTest {
 
     @Test
     void toArticleWithTarget() {
-        ArticleUpdateDto source = new ArticleUpdateDto();
         final String NEW_TITLE = "New title";
-        source.setTitle(NEW_TITLE);
+        ArticleUpdateDto source = ArticleUpdateDto.builder()
+                .title(NEW_TITLE)
+                .build();
         Article target = buildArticle();
         final String OLD_TEXT = target.getText();
 
@@ -84,27 +72,27 @@ class ArticleMapperTest {
     }
 
     private Article buildArticle() {
-        Article article = new Article();
-        article.setId(123L);
-        article.setTitle("Some tittle value");
-        article.setSummary("Some summary value");
-        article.setText("Some text");
-        article.setAuthor("John Deer");
-        article.setDateCreated(LocalDateTime.of(1980, 9, 21, 0, 0));
-        article.setDateUpdated(LocalDateTime.of(2011, 3, 5, 0, 0));
-        return article;
+        return Article.builder()
+                .id(123L)
+                .title("Some tittle value")
+                .summary("Some summary value")
+                .text("Some text")
+                .author("John Deer")
+                .dateCreated(LocalDateTime.of(1980, 9, 21, 0, 0))
+                .dateUpdated(LocalDateTime.of(2011, 3, 5, 0, 0))
+                .build();
     }
 
     private ArticleDto buildArticleDto() {
-        ArticleDto articleDto = new ArticleDto();
-        articleDto.setId(123L);
-        articleDto.setTitle("Some tittle value");
-        articleDto.setSummary("Some summary value");
-        articleDto.setText("Some text");
-        articleDto.setAuthor("John Deer");
-        articleDto.setDateCreated(LocalDateTime.of(1980, 9, 21, 0, 0));
-        articleDto.setDateUpdated(LocalDateTime.of(2011, 3, 5, 0, 0));
-        return articleDto;
+        return ArticleDto.builder()
+                .id(123L)
+                .title("Some tittle value")
+                .summary("Some summary value")
+                .text("Some text")
+                .author("John Deer")
+                .dateCreated(LocalDateTime.of(1980, 9, 21, 0, 0))
+                .dateUpdated(LocalDateTime.of(2011, 3, 5, 0, 0))
+                .build();
     }
 
     private void checkCompareAssertions(ArticleDto articleDto, Article article) {

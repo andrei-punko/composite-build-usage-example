@@ -11,9 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +29,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -62,10 +59,10 @@ class ArticleServiceTest {
 
     @Test
     void create() {
-        ArticleDto articleDto = new ArticleDto();
-        Article article = new Article();
-        Article updatedArticle = new Article();
-        ArticleDto updatedArticleDto = new ArticleDto();
+        ArticleDto articleDto = ArticleDto.builder().build();
+        Article article = Article.builder().build();
+        Article updatedArticle = Article.builder().build();
+        ArticleDto updatedArticleDto = ArticleDto.builder().build();
 
         when(articleMapperMock.toArticle(articleDto)).thenReturn(article);
         when(articleRepositoryMock.save(article)).thenReturn(updatedArticle);
@@ -117,8 +114,9 @@ class ArticleServiceTest {
         Article savedArticle = new Article();
         Optional<Article> optionalArticle = Optional.of(article);
         ArticleUpdateDto articleUpdateDto = new ArticleUpdateDto();
-        ArticleDto updatedArticleDto = new ArticleDto();
-        updatedArticleDto.setTitle("New title");
+        ArticleDto updatedArticleDto = ArticleDto.builder()
+                .title("New title")
+                .build();
 
         when(articleRepositoryMock.findById(ARTICLE_ID)).thenReturn(optionalArticle);
         when(articleRepositoryMock.save(article)).thenReturn(savedArticle);
@@ -151,29 +149,31 @@ class ArticleServiceTest {
     @Test
     void delete() {
         final Long ARTICLE_ID = 123L;
+        when(articleRepositoryMock.existsById(ARTICLE_ID)).thenReturn(true);
 
         articleService.delete(ARTICLE_ID);
 
+        verify(articleRepositoryMock).existsById(ARTICLE_ID);
         verify(articleRepositoryMock).deleteById(ARTICLE_ID);
     }
 
     @Test
     void deleteAbsentArticle() {
         final Long ARTICLE_ID = 123L;
-        doThrow(new EmptyResultDataAccessException(1)).when(articleRepositoryMock).deleteById(ARTICLE_ID);
+        when(articleRepositoryMock.existsById(ARTICLE_ID)).thenReturn(false);
 
         try {
             articleService.delete(ARTICLE_ID);
 
             fail("Exception should be thrown");
         } catch (ArticleNotFoundException ex) {
-            verify(articleRepositoryMock).deleteById(ARTICLE_ID);
+            verify(articleRepositoryMock).existsById(ARTICLE_ID);
             assertThat("Wrong message", ex.getMessage(), is("Could not find an article by id=" + ARTICLE_ID));
         }
     }
 
     @Test
-    void getAll() {
+    void getAllPaged() {
         final Integer pageNo = 2;
         final Integer pageSize = 20;
         final String sortBy = "title";

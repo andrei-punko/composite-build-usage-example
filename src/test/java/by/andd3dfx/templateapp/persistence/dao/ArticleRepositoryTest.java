@@ -1,16 +1,16 @@
 package by.andd3dfx.templateapp.persistence.dao;
 
-import by.andd3dfx.templateapp.IntegrationTestInitializer;
 import by.andd3dfx.templateapp.persistence.entities.Article;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -18,10 +18,9 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-@ContextConfiguration(initializers = IntegrationTestInitializer.class)
-@SpringBootTest
+@DataJpaTest
 class ArticleRepositoryTest {
 
     @Autowired
@@ -47,9 +46,10 @@ class ArticleRepositoryTest {
 
     @Test
     public void findAll() {
-        var result = repository.findAll(PageRequest.of(0, 10));
+        var result = repository.findAll(Pageable.ofSize(10));
 
         assertThat("Wrong records amount", result.getNumberOfElements(), is(3));
+        assertTrue(result.getContent().containsAll(List.of(entity, entity2, entity3)));
     }
 
     @Test
@@ -58,12 +58,8 @@ class ArticleRepositoryTest {
 
         assertThat("Wrong records amount", result.getNumberOfElements(), is(2));
         var articles = result.getContent();
-
-        assertThat(articles.get(0).getTitle(), is(entity3.getTitle()));
-        assertThat(articles.get(0).getSummary(), is(entity3.getSummary()));
-
-        assertThat(articles.get(1).getTitle(), is(entity.getTitle()));
-        assertThat(articles.get(1).getSummary(), is(entity.getSummary()));
+        assertThat(articles.get(0), is(entity3));
+        assertThat(articles.get(1), is(entity));
     }
 
     private static Article buildArticle(String title, String summary, LocalDateTime timestamp) {
