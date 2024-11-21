@@ -20,11 +20,12 @@ import by.andd3dfx.templateapp.dto.ArticleUpdateDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.time.LocalDateTime;
+
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -440,10 +441,6 @@ class ArticleControllerTest {
     }
 
     private String createStringWithLength(int length) {
-        StringBuilder builder = new StringBuilder();
-        for (int index = 0; index < length; index++) {
-            builder.append("a");
-        }
-        return builder.toString();
+        return RandomStringUtils.randomAlphanumeric(length);
     }
 }
