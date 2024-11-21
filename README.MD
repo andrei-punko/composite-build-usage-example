@@ -53,10 +53,20 @@ service(version = "0.0.1") {
 }
 ```
 
-## How to build
-
+## Initialize Git submodule with build configuration:
 ```
 git submodule init
 git submodule update
+```
+
+## How to build application:
+```
 gradlew clean build
 ```
+
+## Run functional tests:
+
+    cd func-test
+    ./gradlew clean build
+
+Check functional test report [here](func-test/build/spock-reports/index.html)
