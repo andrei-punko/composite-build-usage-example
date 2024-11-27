@@ -54,12 +54,14 @@ service(version = "0.0.1") {
 ```
 
 ## Initialize Git submodule with build configuration:
+
 ```
 git submodule init
 git submodule update
 ```
 
 ## How to build application:
+
 ```
 gradlew clean build
 ```
