@@ -3,7 +3,7 @@ import by.andd3dfx.build.Plugins.Companion.applyPlugins
 
 service(version = "0.0.1") {
     dependencies {
-        springBoot {
+        springBoot(project) {
             web()
             test()
             dataJpa()
