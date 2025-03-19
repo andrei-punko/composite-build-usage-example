@@ -15,10 +15,10 @@ Sources was not changed almost, only build script adjusted
 
 ## Conception description
 
-**Composite Build** is externalization of build by put dependencies and plugins into separate Git repository
-(which added to project as [Git submodule](.gitmodules))
+`Composite Build` is externalization of build by put dependencies and plugins into separate Git repository
+(which should be added as [Git submodule](.gitmodules) of project)
 
-After that [build script](build.gradle.kts) looks like this:
+After that [build script](build.gradle.kts) will looks like this:
 
 ```
 import by.andd3dfx.build.*
@@ -26,12 +26,12 @@ import by.andd3dfx.build.Plugins.Companion.applyPlugins
 
 service(version = "0.0.1") {
     dependencies {
-        springBoot {
+        springBoot(project) {
             web()
             test()
             dataJpa()
             validation()
-            ...
+            // ...
         }
 
         lombok()
@@ -44,7 +44,7 @@ service(version = "0.0.1") {
         flywayCore()
         testContainers()
         postgresTestContainers()
-        ...
+        // ...
 
         applyPlugins {
             springBoot()
@@ -63,7 +63,7 @@ git submodule update
 ## How to build application:
 
 ```
-gradlew clean build
+./gradlew clean build
 ```
 
 ## Run functional tests:

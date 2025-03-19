@@ -8,6 +8,7 @@ service(version = "0.0.1") {
             test()
             dataJpa()
             validation()
+            // ...
         }
 
         lombok()
@@ -20,6 +21,7 @@ service(version = "0.0.1") {
         flywayCore()
         testContainers()
         postgresTestContainers()
+        // ...
 
         applyPlugins {
             springBoot()
