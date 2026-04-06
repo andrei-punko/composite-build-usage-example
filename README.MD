@@ -10,7 +10,7 @@ Sources was not changed almost, only build script adjusted
 
 - JDK 21
 - Docker  
-  Gradle isn't required because of embedded Gradle in the project
+(Gradle isn't required because of embedded Gradle in the project)
 
 ## Conception description
 
@@ -19,7 +19,7 @@ Sources was not changed almost, only build script adjusted
 
 After that [build script](build.gradle.kts) will looks like this:
 
-```
+```kotlin
 import by.andd3dfx.build.*
 import by.andd3dfx.build.Plugins.Companion.applyPlugins
 
@@ -65,9 +65,17 @@ git submodule update
 ./gradlew clean build
 ```
 
+## How to run application:
+
+```
+run-app.bat
+```
+
 ## Run functional tests:
 
+```
     cd func-test
     ./gradlew clean build
+```
 
 Check functional test report [here](func-test/build/spock-reports/index.html)
