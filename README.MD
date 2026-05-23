@@ -1,7 +1,8 @@
 # Composite Build usage example
 
-![Java CI with Gradle](https://github.com/andrei-punko/composite-build-usage-example/workflows/Java%20CI%20with%20Gradle/badge.svg)
+[![Java CI with Gradle](https://github.com/andrei-punko/composite-build-usage-example/actions/workflows/gradle.yml/badge.svg)](https://github.com/andrei-punko/composite-build-usage-example/actions/workflows/gradle.yml)
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/composite-build-usage-example/actions/workflows/gradle.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Based on [this](https://github.com/andrei-punko/spring-boot-2-template) Spring Boot app template.
 Sources was not changed almost, only build script adjusted
@@ -10,7 +11,7 @@ Sources was not changed almost, only build script adjusted
 
 - JDK 21
 - Docker  
-(Gradle isn't required because of embedded Gradle in the project)
+- Gradle (embedded)
 
 ## Conception description
 
