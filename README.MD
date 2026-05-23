@@ -10,7 +10,7 @@ Sources was not changed almost, only build script adjusted
 ## Prerequisites
 
 - JDK 21
-- Docker  
+- Docker
 - Gradle (embedded)
 
 ## Conception description
@@ -75,8 +75,8 @@ run-app.bat
 ## Run functional tests:
 
 ```
-    cd func-test
-    ./gradlew clean build
+cd func-test
+./gradlew clean build
 ```
 
 Check functional test report [here](func-test/build/spock-reports/index.html)
