@@ -9,7 +9,7 @@ Sources was not changed almost, only build script adjusted
 
 ## Prerequisites
 
-- JDK 21
+- JDK 21 (Spring Boot 2 + Gradle 8 are not compatible with Java 25)
 - Docker
 - Gradle (embedded)
 
