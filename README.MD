@@ -4,7 +4,9 @@
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/composite-build-usage-example/actions/workflows/gradle.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Based on [this](https://github.com/andrei-punko/spring-boot-2-template) Spring Boot app template.
+Here is example of usage [this](https://github.com/andrei-punko/build-src-utils) repository
+
+Based on [this](https://github.com/andrei-punko/spring-boot-2-template) Spring Boot 2 app template.
 Sources was not changed almost, only build script adjusted
 
 ## Prerequisites
