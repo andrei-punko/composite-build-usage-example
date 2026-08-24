@@ -1,4 +1,4 @@
-# Composite Build usage example
+# Separate build configuration from the project
 
 [![Java CI with Gradle](https://github.com/andrei-punko/composite-build-usage-example/actions/workflows/gradle.yml/badge.svg)](https://github.com/andrei-punko/composite-build-usage-example/actions/workflows/gradle.yml)
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/composite-build-usage-example/actions/workflows/gradle.yml)
@@ -22,7 +22,7 @@ After that [build script](build.gradle.kts) will looks like this:
 
 ```kotlin
 import by.andd3dfx.build.*
-import by.andd3dfx.build.Plugins.Companion.applyPlugins
+import by.andd3dfx.build.Plugins.Companion.plugins
 
 service(version = "0.0.1") {
     dependencies {
@@ -46,7 +46,7 @@ service(version = "0.0.1") {
         postgresTestContainers()
         // ...
 
-        applyPlugins {
+        plugins {
             springBoot()
         }
     }
